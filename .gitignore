@@ -1,0 +1,16 @@
+# 建置產物
+hfs-gui/target/
+dist/
+
+# HFS 本體與執行時資料（請到 HFS 官方下載）
+hfs/*
+!hfs/config.example.yaml
+!hfs/plugins/
+hfs/plugins/*
+!hfs/plugins/drive-ui/
+
+# 個人筆記與本機設定
+CLAUDE.md
+本機筆記.md
+hfs-gui.json
+*.log

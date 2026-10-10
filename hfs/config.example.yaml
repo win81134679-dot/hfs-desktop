@@ -1,0 +1,17 @@
+# HFS 設定範例：複製成 config.yaml 放在 hfs.exe 旁邊，再依需求修改
+# 完整設定說明：https://github.com/rejetto/hfs/blob/main/config.md
+
+port: 8080
+# 用桌面程式管理就不需要開瀏覽器
+open_browser_at_start: false
+
+# 啟用雲端硬碟風格的分享網頁（drive-ui）
+enable_plugins:
+  - antibrute
+  - drive-ui
+
+vfs:
+  # 要分享的資料夾，改成你自己的路徑
+  source: C:\Share\
+  # 區網內任何人都能上傳；刪除、改名維持只有管理員
+  can_upload: true
