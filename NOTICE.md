@@ -13,6 +13,7 @@
 | [qrcode](https://github.com/kennytm/qrcode-rust) | QR Code | MIT / Apache-2.0 |
 | [rfd](https://github.com/PolyMeilex/rfd) | 檔案選擇對話框 | MIT |
 | [serde_json](https://github.com/serde-rs/json)、[chrono](https://github.com/chronotope/chrono)、[windows-sys](https://github.com/microsoft/windows-rs)、[winresource](https://github.com/BenjaminRi/winresource) | 其他 | MIT / Apache-2.0 |
+| [Inno Setup](https://jrsoftware.org/isinfo.php)（Jordan Russell、Martijn Laan） | 安裝程式；`scripts/ChineseTraditional.isl` 為其非官方繁體中文翻譯 | Inno Setup License |
 
 介面字型使用 Windows 內建的 Segoe UI 與微軟正黑體，不隨本專案散布。
 

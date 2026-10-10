@@ -72,5 +72,15 @@ $archive.Dispose(); $fs.Dispose()
 # 單一 exe 版本（自動下載 HFS）也另外放一份
 Copy-Item $exe (Join-Path $dist "HFS-Desktop-v$version.exe") -Force
 
+# 安裝程式（建桌面與開始功能表捷徑「HFS 檔案分享」）；沒裝 Inno Setup 6 就略過
+$iscc = @("$env:LOCALAPPDATA\Programs\Inno Setup 6\ISCC.exe", "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe") |
+    Where-Object { Test-Path $_ } | Select-Object -First 1
+if ($iscc) {
+    & $iscc /Q "/DAppVersion=$version" "/DExeFile=$exe" (Join-Path $root 'scripts\installer.iss')
+    if ($LASTEXITCODE) { throw "安裝程式編譯失敗（ISCC exit $LASTEXITCODE）" }
+} else {
+    Write-Host "找不到 Inno Setup 6，略過安裝程式" -ForegroundColor Yellow
+}
+
 Write-Host "完成：" -ForegroundColor Green
 Get-ChildItem $dist -File | ForEach-Object { "  {0}  {1:N1} MB  SHA256 {2}" -f $_.Name, ($_.Length / 1MB), (Get-FileHash $_.FullName -Algorithm SHA256).Hash }

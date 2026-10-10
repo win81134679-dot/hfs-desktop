@@ -59,6 +59,7 @@ HFS v3 功能很強，但所有設定都要在瀏覽器裡的管理頁面操作�
   - 最近兩分鐘的流量圖
 - **手機 QR Code**：用手機掃描就能連進分享網頁
 - **系統匣**：關閉視窗時可選擇在背景繼續運行；可設定開機自動啟動
+- **安裝程式**：自動建立桌面與開始功能表捷徑「HFS 檔案分享」，可從「設定 → 應用程式」解除安裝
 - **伺服器設定**：網站標題、埠號、速度上限、每個 IP 同時下載數、同名檔案處理、封鎖清單
 - **HFS 自動更新**：
   - 每天最多檢查一次，有新版會提醒：立即升級、稍後提醒或略過這個版本
@@ -85,7 +86,15 @@ HFS v3 功能很強，但所有設定都要在瀏覽器裡的管理頁面操作�
 
 ## 安裝
 
-### 方法一：單一 exe（最簡單）
+### 方法一：安裝程式（建議）
+
+到 [Releases](https://github.com/win81134679-dot/hfs-desktop/releases/latest) 下載 `HFS-Desktop-Setup-v*.exe` 並執行：
+- 安裝到 `%LOCALAPPDATA%\Programs\HFS Desktop\`，只裝給目前帳號，不需要系統管理員權限
+- 建立開始功能表捷徑「HFS 檔案分享」，桌面捷徑可在安裝時勾選（預設勾選）
+- 第一次啟動的流程和下面的單一 exe 相同（自動下載最新版 HFS、套用設定）
+- 解除安裝只會移除程式本身，HFS 與設定（`%LOCALAPPDATA%\HFS Desktop\`）和分享的檔案都會保留
+
+### 方法二：單一 exe（免安裝）
 
 到 [Releases](https://github.com/win81134679-dot/hfs-desktop/releases/latest) 下載 `HFS-Desktop-v*.exe`，放在任何地方雙擊即可。
 
@@ -96,7 +105,7 @@ HFS v3 功能很強，但所有設定都要在瀏覽器裡的管理頁面操作�
 
 之後 HFS 有新版，程式會提醒你一鍵升級，不需要重新下載這個 exe。換成新版 exe 時，分享網頁也會自動同步更新。
 
-### 方法二：搭配自己下載的 HFS
+### 方法三：搭配自己下載的 HFS
 
 #### 1. 下載 HFS
 
@@ -154,7 +163,7 @@ powershell -ExecutionPolicy Bypass -File scripts\build-release.ps1
 - 跑單元測試
 - 用 `--remap-path-prefix` 把本機路徑（Windows 使用者名稱、專案資料夾）從 exe 裡移除
 - 建置後掃描 exe，確認沒有殘留本機路徑才打包；有殘留就停止
-- 打包到 `dist\`
+- 打包到 `dist\`；有裝 [Inno Setup 6](https://jrsoftware.org/isinfo.php) 時一併產生安裝程式（`scripts/installer.iss`）
 
 一般的 `cargo build` 會把建置機器的路徑寫進 exe，**不適合直接公開發佈**。
 
@@ -177,6 +186,7 @@ hfs-gui/                 桌面程式（Rust + egui）
 hfs/plugins/drive-ui/    分享網頁外掛（取代 HFS 預設前端）
 hfs/config.example.yaml  設定範例
 scripts/build-release.ps1  發佈用建置（移除本機路徑＋掃描＋打包）
+scripts/installer.iss      安裝程式（Inno Setup，建立捷徑）
 ```
 
 ### 運作方式
